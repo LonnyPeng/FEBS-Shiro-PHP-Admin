@@ -1,0 +1,204 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Api \u6587\u6863",
+        "description": "Api \u6587\u6863",
+        "version": "1.0.0"
+    },
+    "host": "www.tp5.com",
+    "basePath": "/api",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/index/index": {
+            "get": {
+                "tags": [
+                    "Index"
+                ],
+                "summary": "\u83b7\u53d6\u4e00\u4e9b\u4eba",
+                "description": "\u8fd4\u56de\u5305\u542b\u6240\u6709\u4eba\u7684\u5217\u8868\u3002",
+                "responses": {
+                    "200": {
+                        "description": "\u4e00\u4e2a\u7528\u6237\u5217\u8868",
+                        "schema": {
+                            "properties": {
+                                "firstName": {
+                                    "description": "\u4e00\u4e2a\u7528\u6237\u5217\u8868",
+                                    "type": "string"
+                                },
+                                "lastName": {
+                                    "type": "string"
+                                },
+                                "username": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/persons": {
+            "post": {
+                "tags": [
+                    "Index"
+                ],
+                "summary": "Creates a person",
+                "description": "Adds a new person to the persons list.",
+                "parameters": [
+                    {
+                        "name": "person",
+                        "in": "body",
+                        "description": "The person to create.",
+                        "required": true,
+                        "schema": {
+                            "required": [
+                                "username"
+                            ],
+                            "properties": {
+                                "firstName": {
+                                    "type": "string"
+                                },
+                                "lastName": {
+                                    "type": "string"
+                                },
+                                "username": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "\u4e00\u4e2a\u7528\u6237\u5217\u8868",
+                        "schema": {
+                            "properties": {
+                                "firstName": {
+                                    "description": "\u4e00\u4e2a\u7528\u6237\u5217\u8868",
+                                    "type": "string"
+                                },
+                                "lastName": {
+                                    "type": "string"
+                                },
+                                "username": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/login": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\u767b\u5f55",
+                "description": "\u8fd4\u56deTOKEN",
+                "responses": {
+                    "200": {
+                        "description": "\u767b\u5f55\u4fe1\u606f",
+                        "schema": {
+                            "properties": {
+                                "code": {
+                                    "description": "\u4ee3\u7801",
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "description": "\u6d88\u606f",
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "description": "TOKEN",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/info": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\u83b7\u53d6\u7528\u6237\u4fe1\u606f",
+                "description": "\u8fd4\u56de\u7528\u6237\u4fe1\u606f",
+                "responses": {
+                    "200": {
+                        "description": "\u7528\u6237\u4fe1\u606f",
+                        "schema": {
+                            "properties": {
+                                "roles": {
+                                    "description": "\u4ee3\u7801",
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "name": {
+                                                "description": "\u6d88\u606f",
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                },
+                                "introduction": {
+                                    "description": "\u6d88\u606f",
+                                    "type": "string"
+                                },
+                                "token": {
+                                    "description": "TOKEN",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "description": "name",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/logout": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\u7528\u6237\u9000\u51fa",
+                "description": "\u7528\u6237\u9000\u51fa",
+                "responses": {
+                    "200": {
+                        "description": "\u9000\u51fa\u4fe1\u606f",
+                        "schema": {
+                            "properties": {
+                                "introduction": {
+                                    "description": "\u6d88\u606f",
+                                    "type": "string"
+                                },
+                                "avatar": {
+                                    "description": "TOKEN",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {},
+    "tags": [
+        {
+            "name": "Index",
+            "description": "Home Page"
+        },
+        {
+            "name": "User",
+            "description": "User"
+        }
+    ]
+}

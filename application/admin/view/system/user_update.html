@@ -1,0 +1,315 @@
+<style type="text/css">
+    #user-update {
+        padding: 20px 25px 25px 0;
+    }
+
+    #user-update .layui-treeSelect .ztree li a, .ztree li span {
+        margin: 0 0 2px 3px !important;
+    }
+</style>
+<div class="layui-fluid" id="user-update">
+    <form class="layui-form" action="" lay-filter="user-update-form">
+        <div class="layui-form-item febs-hide">
+            <label class="layui-form-label febs-form-item-require">用户id：</label>
+            <div class="layui-input-block">
+                <input type="text" name="id" value="">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label febs-form-item-require">用户名：</label>
+            <div class="layui-input-block">
+                <input type="text" name="username" minlength="4" maxlength="10" lay-verify="" autocomplete="off" class="layui-input" disabled="" placeholder="请输入用户名">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">昵称：</label>
+            <div class="layui-input-block">
+                <input type="text" name="nickname" lay-verify="" autocomplete="off" class="layui-input" placeholder="请输入昵称">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label febs-form-item-require">性别：</label>
+            <div class="layui-input-block">
+                <input type="radio" name="sex" value="1" title="男">
+                <input type="radio" name="sex" value="2" title="女">
+                <input type="radio" name="sex" value="3" title="保密">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">真实姓名：</label>
+            <div class="layui-input-block">
+                <input type="text" name="realname" lay-verify="" autocomplete="off" class="layui-input" placeholder="请输入真实姓名">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">身份证：</label>
+            <div class="layui-input-block">
+                <input type="text" name="idcard" lay-verify="" autocomplete="off" class="layui-input" placeholder="请输入身份证">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">手机：</label>
+            <div class="layui-input-block">
+                <input type="tel" name="phone" lay-verify="phone" autocomplete="off" class="layui-input" placeholder="请输入手机">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">邮箱：</label>
+            <div class="layui-input-block">
+                <input type="text" name="email" lay-verify="email" maxlength="50" autocomplete="off" class="layui-input" placeholder="请输入邮箱">
+            </div>
+        </div>
+        <div class="layui-form-item layui-col-md12">
+            <label class="layui-form-label">选择区域：</label>
+            <div class="layui-col-md3">
+                <select name="location1" lay-verify="" id="js-edit-location1" lay-filter="edit-location1" lay-search>
+                    <option value="">请选择省</option>
+                </select>
+            </div>
+            <div class="layui-col-md3">
+                <select name="location2" lay-verify="" id="js-edit-location2" lay-filter="edit-location2" lay-search>
+                    <option value="">请选择市</option>
+                </select>
+            </div>
+            <div class="layui-col-md3">
+                <select name="location3" lay-verify="" id="js-edit-location3" lay-filter="edit-location3" lay-search>
+                    <option value="">请选择区</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">详细地址：</label>
+            <div class="layui-input-block">
+                <input type="text" name="address" lay-verify=""  maxlength="100" placeholder="请输入详细地址" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label febs-form-item-require">角色：</label>
+            <div class="layui-input-block">
+                <select name="roleId" id="js-edit-roleId" lay-filter="edit-roleId" xm-select-skin="default" xm-select="edit-roleId" xm-select-direction="down" xm-select-search="" lay-verify="required">
+                    <option value="">请输入角色名</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label febs-form-item-require">状态：</label>
+            <div class="layui-input-block">
+                <input type="radio" name="status" value="1" title="有效">
+                <input type="radio" name="status" value="2" title="未审核">
+                <input type="radio" name="status" value="3" title="禁用">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">备注：</label>
+            <div class="layui-input-block">
+                <textarea name="note" class="layui-textarea" placeholder="请输入备注"></textarea>
+            </div>
+        </div>
+
+        <div class="layui-form-item febs-hide">
+            <button class="layui-btn" lay-submit="" lay-filter="user-update-form-submit" id="submit"></button>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    layui.use(['febs', 'form', 'formSelects', 'validate'], function () {
+        var $ = layui.$,
+            febs = layui.febs,
+            layer = layui.layer,
+            formSelects = layui.formSelects,
+            form = layui.form,
+            user = {:$user},
+            $view = $('#user-update'),
+            validate = layui.validate;
+
+        form.verify(validate);
+        form.render();
+
+        initUserValue();
+
+        formSelects.render();
+
+        //省
+        $.ajax({
+            url: ctx + 'location',
+            type: "get",
+            data: {type: 1},
+            dataType: 'json',
+            success: function (re) {
+                var html = '<option value="">请选择省</option>';
+                $(re).each(function (key, row) {
+                    selected = '';
+                    if (row.id == user.location1) {
+                        selected = 'selected';
+                    }
+
+                    html += '<option value="' + row.id + '" ' + selected + '>' + row.name + '</option>';
+                });
+
+                $('#js-edit-location1').html(html);
+                form.render('select').render();
+            }
+        });
+
+        //城市
+        $.ajax({
+            url: ctx + 'location',
+            type: "get",
+            data: {type: 2, fid: user.location1},
+            dataType: 'json',
+            success: function (re) {
+                var html = '<option value="">请选择市</option>';
+
+                $(re).each(function (key, row) {
+                    selected = '';
+                    if (row.id == user.location2) {
+                        selected = 'selected';
+                    }
+
+                    html += '<option value="' + row.id + '" ' + selected + '>' + row.name + '</option>';
+                });
+
+                $('#js-edit-location2').html(html);
+                form.render('select').render();
+            }
+        });
+
+        //区
+        $.ajax({
+            url: ctx + 'location',
+            type: "get",
+            data: {type: 3, fid: user.location2},
+            dataType: 'json',
+            success: function (re) {
+                var html = '<option value="">请选择区</option>';
+
+                $(re).each(function (key, row) {
+                    selected = '';
+                    if (row.id == user.location3) {
+                        selected = 'selected';
+                    }
+
+                    html += '<option value="' + row.id + '" ' + selected + '>' + row.name + '</option>';
+                });
+
+                $('#js-edit-location3').html(html);
+                form.render('select').render();
+            }
+        });
+
+        //选择省份联动城市
+        form.on('select(edit-location1)', function (data) {
+            //城市
+            $.ajax({
+                url: ctx + 'location',
+                type: "get",
+                data: {type: 2, fid: data.value},
+                dataType: 'json',
+                success: function (re) {
+                    var html = '<option value="">请选择市</option>';
+
+                    $(re).each(function (key, row) {
+                        html += '<option value="' + row.id + '">' + row.name + '</option>';
+                    });
+
+                    $('#js-edit-location2').html(html);
+                    $('#js-edit-location3').html('<option value="">请选择区</option>');
+                    form.render('select').render();
+                }
+            });
+        });
+
+        //选择城市份联动区
+        form.on('select(edit-location2)', function (data) {
+            //区
+            $.ajax({
+                url: ctx + 'location',
+                type: "get",
+                data: {type: 3, fid: data.value},
+                dataType: 'json',
+                success: function (re) {
+                    var html = '<option value="">请选择区</option>';
+
+                    $(re).each(function (key, row) {
+                        html += '<option value="' + row.id + '">' + row.name + '</option>';
+                    });
+
+                    $('#js-edit-location3').html(html);
+                    form.render('select').render();
+                }
+            });
+        });
+
+        var editRoleIdStatus = false;
+        formSelects.config('edit-roleId', {
+            searchUrl: ctx + 'role/selectMultiple',
+            response: {
+                statusCode: 200
+            },
+            searchName: 'name',
+            beforeSuccess: function (id, url, searchVal, result) {
+                var data = result.data;
+                var tranData = [];
+                $(data).each(function (key, row) {
+                    tranData.push({
+                        name: row.name,
+                        value: row.id
+                    });
+                });
+
+                result.data = tranData;
+                return result;
+            },
+            success: function (i, a, r, t, d) {
+                if (editRoleIdStatus) {
+                    var ids = [];
+                } else {
+                    var ids = user.roleId.split(',');
+                    editRoleIdStatus = true;
+                }
+
+                $(d).each(function (key, value) {
+                    if ($.inArray(value, ids) == -1) {
+                        ids.push(value);
+                    }
+                });
+                
+                formSelects.value(i, ids);
+            },
+            error: function (id, url, searchVal, err) {
+                febs.alert.error('获取角色列表失败');
+            }
+        });
+
+        function initUserValue() {
+            form.val("user-update-form", {
+                "id": user.id,
+                "username": user.username,
+                "nickname": user.nickname,
+                "realname": user.realname,
+                "idcard": user.idcard,
+                "address": user.address,
+                "phone": user.phone,
+                "email": user.email,
+                "status": user.status,
+                "sex": user.sex,
+                "note": user.note
+            });
+        }
+
+        form.on('submit(user-update-form-submit)', function (data) {
+            if (febs.nativeEqual(data.field, user)) {
+                febs.alert.warn('数据未作任何修改！');
+                return false;
+            }
+            
+            febs.post(ctx + 'user/update', data.field, function () {
+                layer.closeAll();
+                febs.alert.success(user.username + ' 用户数据修改成功');
+                $('#febs-user').find('#query').click();
+            });
+            return false;
+        });
+    });
+</script>

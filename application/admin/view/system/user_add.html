@@ -1,0 +1,216 @@
+<style type="text/css">
+    #user-add {
+        padding: 20px 25px 25px 0;
+    }
+    #user-add .layui-treeSelect .ztree li a, .ztree li span {
+        margin: 0 0 2px 3px !important;
+    }
+</style>
+<div class="layui-fluid" id="user-add">
+    <form class="layui-form" action="" lay-filter="user-add-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label febs-form-item-require">用户名：</label>
+            <div class="layui-input-block">
+                <input type="text" name="username" minlength="2" maxlength="10" lay-verify="range"
+                       autocomplete="off" class="layui-input" placeholder="请输入用户名">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">昵称：</label>
+            <div class="layui-input-block">
+                <input type="text" name="nickname" lay-verify="" autocomplete="off" class="layui-input" placeholder="请输入昵称">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label febs-form-item-require">性别：</label>
+            <div class="layui-input-block">
+                <input type="radio" name="sex" value="1" title="男">
+                <input type="radio" name="sex" value="2" title="女">
+                <input type="radio" name="sex" value="3" title="保密" checked="">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">真实姓名：</label>
+            <div class="layui-input-block">
+                <input type="text" name="realname" lay-verify="" autocomplete="off" class="layui-input" placeholder="请输入真实姓名">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">身份证：</label>
+            <div class="layui-input-block">
+                <input type="text" name="idcard" lay-verify="" autocomplete="off" class="layui-input" placeholder="请输入身份证">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">手机：</label>
+            <div class="layui-input-block">
+                <input type="tel" name="phone" lay-verify="phone" autocomplete="off" class="layui-input" placeholder="请输入手机">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">邮箱：</label>
+            <div class="layui-input-block">
+                <input type="text" name="email" lay-verify="email" maxlength="50" autocomplete="off" class="layui-input" placeholder="请输入邮箱">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">选择区域：</label>
+            <div class="layui-input-inline">
+                <select name="location1" lay-verify="" id="js-add-location1" lay-filter="add-location1" lay-search>
+                    <option value="">请选择省</option>
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <select name="location2" lay-verify="" id="js-add-location2" lay-filter="add-location2" lay-search>
+                    <option value="">请选择市</option>
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <select name="location3" lay-verify="" id="js-add-location3" lay-filter="add-location3" lay-search>
+                    <option value="">请选择区</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">详细地址：</label>
+            <div class="layui-input-block">
+                <input type="text" name="address" lay-verify=""  maxlength="100" placeholder="请输入详细地址" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label febs-form-item-require">角色：</label>
+            <div class="layui-input-block">
+                <select name="roleId" id="js-add-roleId" lay-filter="add-roleId" xm-select-skin="default" xm-select="add-roleId" xm-select-direction="down" xm-select-search="" lay-verify="required">
+                    <option value="">请输入角色名</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label febs-form-item-require">状态：</label>
+            <div class="layui-input-block">
+                <input type="radio" name="status" value="1" title="有效" checked="">
+                <input type="radio" name="status" value="2" title="未审核">
+                <input type="radio" name="status" value="3" title="禁用">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">备注：</label>
+            <div class="layui-input-block">
+                <textarea name="note" class="layui-textarea" placeholder="请输入备注"></textarea>
+            </div>
+        </div>
+
+        <div class="layui-form-item febs-hide">
+            <button class="layui-btn" lay-submit="" lay-filter="user-add-form-submit" id="submit"></button>
+            <button type="reset" class="layui-btn" id="reset"></button>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    layui.use(['febs', 'form', 'validate', 'formSelects'], function () {
+        var $ = layui.$,
+            febs = layui.febs,
+            layer = layui.layer,
+            formSelects = layui.formSelects,
+            form = layui.form,
+            $view = $('#user-add'),
+            validate = layui.validate;
+
+        form.verify(validate);
+        form.render();
+        formSelects.render();
+
+        //省
+        $.ajax({
+            url: ctx + 'location',
+            type: "get",
+            data: {type: 1},
+            dataType: 'json',
+            success: function (re) {
+                var html = '<option value="">请选择省</option>';
+                $(re).each(function (key, row) {
+                    html += '<option value="' + row.id + '">' + row.name + '</option>';
+                });
+
+                $('#js-add-location1').html(html);
+                form.render('select').render();
+            }
+        });
+
+        //选择省份联动城市
+        form.on('select(add-location1)', function (data) {
+            //城市
+            $.ajax({
+                url: ctx + 'location',
+                type: "get",
+                data: {type: 2, fid: data.value},
+                dataType: 'json',
+                success: function (re) {
+                    var html = '<option value="">请选择市</option>';
+
+                    $(re).each(function (key, row) {
+                        html += '<option value="' + row.id + '">' + row.name + '</option>';
+                    });
+
+                    $('#js-add-location2').html(html);
+                    $('#js-add-location3').html('<option value="">请选择区</option>');
+                    form.render('select').render();
+                }
+            });
+        });
+
+        //选择城市份联动区
+        form.on('select(add-location2)', function (data) {
+            //区
+            $.ajax({
+                url: ctx + 'location',
+                type: "get",
+                data: {type: 3, fid: data.value},
+                dataType: 'json',
+                success: function (re) {
+                    var html = '<option value="">请选择区</option>';
+
+                    $(re).each(function (key, row) {
+                        html += '<option value="' + row.id + '">' + row.name + '</option>';
+                    });
+
+                    $('#js-add-location3').html(html);
+                    form.render('select').render();
+                }
+            });
+        });
+
+        formSelects.config('add-roleId', {
+            searchUrl: ctx + 'role/selectMultiple',
+            response: {
+                statusCode: 200
+            },
+            searchName: 'name',
+            beforeSuccess: function (id, url, searchVal, result) {
+                var data = result.data;
+                var tranData = [];
+                $(data).each(function (key, row) {
+                    tranData.push({
+                        name: row.name,
+                        value: row.id
+                    });
+                });
+                result.data = tranData;
+                return result;
+            },
+            error: function (id, url, searchVal, err) {
+                febs.alert.error('获取角色列表失败');
+            }
+        });
+
+        form.on('submit(user-add-form-submit)', function (data) {
+            febs.post(ctx + 'user/add', data.field, function () {
+                layer.closeAll();
+                febs.alert.success('新增用户成功，初始密码为 1234qwer');
+                $('#febs-user').find('#query').click();
+            });
+            return false;
+        });
+    });
+</script>

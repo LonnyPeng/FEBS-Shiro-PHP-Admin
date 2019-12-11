@@ -1,0 +1,376 @@
+2019-11-13 15:33:10 pid:25886 Workerman[server.php] start in DEBUG mode
+2019-11-13 15:36:19 pid:25886 Workerman[server.php] stopping ...
+2019-11-13 15:36:19 pid:25886 Workerman[server.php] has been stopped
+2019-11-13 15:40:40 pid:26376 Workerman[server.php] start in DEBUG mode
+2019-11-13 15:41:01 pid:26376 Workerman[server.php] stopping ...
+2019-11-13 15:41:01 pid:26376 Workerman[server.php] has been stopped
+2019-11-13 15:41:16 pid:26406 Workerman[server.php] start in DEBUG mode
+2019-11-13 15:41:24 pid:26406 Workerman[server.php] stopping ...
+2019-11-13 15:41:24 pid:26406 Workerman[server.php] has been stopped
+2019-11-13 16:01:19 pid:27562 Workerman[server.php] start in DEBUG mode
+2019-11-13 16:02:11 pid:27562 Workerman[server.php] stopping ...
+2019-11-13 16:02:11 pid:27562 Workerman[server.php] has been stopped
+2019-11-13 16:02:12 pid:27607 Workerman[server.php] start in DEBUG mode
+2019-11-13 16:02:19 pid:27607 Workerman[server.php] stopping ...
+2019-11-13 16:02:19 pid:27607 Workerman[server.php] has been stopped
+2019-11-13 16:03:42 pid:27673 Workerman[server.php] start in DEBUG mode
+2019-11-13 16:05:43 pid:27673 Workerman[server.php] stopping ...
+2019-11-13 16:05:43 pid:27673 Workerman[server.php] has been stopped
+2019-11-13 16:05:44 pid:27768 Workerman[server.php] start in DEBUG mode
+2019-11-13 16:06:15 pid:27768 Workerman[server.php] stopping ...
+2019-11-13 16:06:15 pid:27768 Workerman[server.php] has been stopped
+2019-11-13 16:06:16 pid:27821 Workerman[server.php] start in DEBUG mode
+2019-11-13 16:14:09 pid:6192 Workerman[server.php] start in DEBUG mode
+2019-11-13 17:42:00 pid:6192 Workerman[server.php] stopping ...
+2019-11-13 17:42:00 pid:6192 Workerman[server.php] has been stopped
+2019-11-13 17:42:04 pid:10544 Workerman[server.php] start in DEBUG mode
+2019-11-13 18:04:14 pid:10544 Workerman[server.php] stopping ...
+2019-11-13 18:04:14 pid:10544 Workerman[server.php] has been stopped
+2019-11-13 18:04:19 pid:11322 Workerman[server.php] start in DEBUG mode
+2019-11-13 18:10:15 pid:11322 Workerman[server.php] stopping ...
+2019-11-13 18:10:15 pid:11322 Workerman[server.php] has been stopped
+2019-11-13 18:10:16 pid:11748 Workerman[server.php] start in DEBUG mode
+2019-11-13 18:14:16 pid:11748 Workerman[server.php] stopping ...
+2019-11-13 18:14:16 pid:11748 Workerman[server.php] has been stopped
+2019-11-13 18:14:17 pid:11898 Workerman[server.php] start in DEBUG mode
+2019-11-13 18:14:24 pid:11900 exception 'think\exception\ErrorException' with message 'Undefined variable: login' in /data/web/tp5/application/push/controller/Worker.php:103
+Stack trace:
+#0 /data/web/tp5/application/push/controller/Worker.php(103): think\Error::appError(8, 'Undefined varia...', '/data/web/tp5/a...', 103, Array)
+#1 /data/web/tp5/application/push/controller/Worker.php(55): app\push\controller\Worker->login(2)
+#2 [internal function]: app\push\controller\Worker->onMessage(Object(Workerman\Connection\TcpConnection), '{"type":"login"...')
+#3 /data/web/tp5/vendor/workerman/workerman/Connection/TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\TcpConnection), '{"type":"login"...')
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #58)
+#5 /data/web/tp5/vendor/workerman/workerman/Events/Select.php(294): call_user_func_array(Array, Array)
+#6 /data/web/tp5/vendor/workerman/workerman/Worker.php(2382): Workerman\Events\Select->loop()
+#7 /data/web/tp5/vendor/workerman/workerman/Worker.php(1490): Workerman\Worker->run()
+#8 /data/web/tp5/vendor/workerman/workerman/Worker.php(1320): Workerman\Worker::forkOneWorkerForLinux(Object(Workerman\Worker))
+#9 /data/web/tp5/vendor/workerman/workerman/Worker.php(1294): Workerman\Worker::forkWorkersForLinux()
+#10 /data/web/tp5/vendor/workerman/workerman/Worker.php(509): Workerman\Worker::forkWorkers()
+#11 /data/web/tp5/vendor/topthink/think-worker/src/Server.php(48): Workerman\Worker::runAll()
+#12 /data/web/tp5/application/push/controller/Worker.php(24): think\worker\Server->__construct()
+#13 [internal function]: app\push\controller\Worker->__construct()
+#14 /data/web/tp5/thinkphp/library/think/App.php(359): ReflectionClass->newInstanceArgs(Array)
+#15 /data/web/tp5/thinkphp/library/think/Loader.php(479): think\App::invokeClass('app\\push\\contro...')
+#16 /data/web/tp5/thinkphp/library/think/App.php(581): think\Loader::controller('worker', 'controller', false, 'Error')
+#17 /data/web/tp5/thinkphp/library/think/App.php(457): think\App::module(Array, Array, NULL)
+#18 /data/web/tp5/thinkphp/library/think/App.php(139): think\App::exec(Array, Array)
+#19 /data/web/tp5/thinkphp/start.php(19): think\App::run()
+#20 /data/web/tp5/server.php(16): require('/data/web/tp5/t...')
+#21 {main}
+2019-11-13 18:14:24 pid:11900 Worker[11900] process terminated
+2019-11-13 18:14:24 pid:11898 worker[none:11900] exit with status 64000
+2019-11-13 18:15:10 pid:11898 Workerman[server.php] stopping ...
+2019-11-13 18:15:10 pid:11898 Workerman[server.php] has been stopped
+2019-11-13 18:15:11 pid:11962 Workerman[server.php] start in DEBUG mode
+2019-11-13 18:15:16 pid:11965 Worker[11965] process terminated
+2019-11-13 18:16:15 pid:11962 Workerman[server.php] stopping ...
+2019-11-13 18:16:15 pid:11962 Workerman[server.php] has been stopped
+2019-11-13 18:16:15 pid:12040 Workerman[server.php] start in DEBUG mode
+2019-11-13 18:16:20 pid:12044 exception 'think\exception\ErrorException' with message 'Undefined variable: login' in /data/web/tp5/application/push/controller/Worker.php:103
+Stack trace:
+#0 /data/web/tp5/application/push/controller/Worker.php(103): think\Error::appError(8, 'Undefined varia...', '/data/web/tp5/a...', 103, Array)
+#1 /data/web/tp5/application/push/controller/Worker.php(55): app\push\controller\Worker->login(2)
+#2 [internal function]: app\push\controller\Worker->onMessage(Object(Workerman\Connection\TcpConnection), '{"type":"login"...')
+#3 /data/web/tp5/vendor/workerman/workerman/Connection/TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\TcpConnection), '{"type":"login"...')
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #58)
+#5 /data/web/tp5/vendor/workerman/workerman/Events/Select.php(294): call_user_func_array(Array, Array)
+#6 /data/web/tp5/vendor/workerman/workerman/Worker.php(2382): Workerman\Events\Select->loop()
+#7 /data/web/tp5/vendor/workerman/workerman/Worker.php(1490): Workerman\Worker->run()
+#8 /data/web/tp5/vendor/workerman/workerman/Worker.php(1320): Workerman\Worker::forkOneWorkerForLinux(Object(Workerman\Worker))
+#9 /data/web/tp5/vendor/workerman/workerman/Worker.php(1294): Workerman\Worker::forkWorkersForLinux()
+#10 /data/web/tp5/vendor/workerman/workerman/Worker.php(509): Workerman\Worker::forkWorkers()
+#11 /data/web/tp5/vendor/topthink/think-worker/src/Server.php(48): Workerman\Worker::runAll()
+#12 /data/web/tp5/application/push/controller/Worker.php(24): think\worker\Server->__construct()
+#13 [internal function]: app\push\controller\Worker->__construct()
+#14 /data/web/tp5/thinkphp/library/think/App.php(359): ReflectionClass->newInstanceArgs(Array)
+#15 /data/web/tp5/thinkphp/library/think/Loader.php(479): think\App::invokeClass('app\\push\\contro...')
+#16 /data/web/tp5/thinkphp/library/think/App.php(581): think\Loader::controller('worker', 'controller', false, 'Error')
+#17 /data/web/tp5/thinkphp/library/think/App.php(457): think\App::module(Array, Array, NULL)
+#18 /data/web/tp5/thinkphp/library/think/App.php(139): think\App::exec(Array, Array)
+#19 /data/web/tp5/thinkphp/start.php(19): think\App::run()
+#20 /data/web/tp5/server.php(16): require('/data/web/tp5/t...')
+#21 {main}
+2019-11-13 18:16:20 pid:12044 Worker[12044] process terminated
+2019-11-13 18:16:20 pid:12040 worker[none:12044] exit with status 64000
+2019-11-13 18:17:15 pid:12040 Workerman[server.php] stopping ...
+2019-11-13 18:17:15 pid:12040 Workerman[server.php] has been stopped
+2019-11-13 18:17:16 pid:12123 Workerman[server.php] start in DEBUG mode
+2019-11-13 18:17:21 pid:12125 exception 'think\exception\ErrorException' with message 'Undefined variable: login' in /data/web/tp5/application/push/controller/Worker.php:103
+Stack trace:
+#0 /data/web/tp5/application/push/controller/Worker.php(103): think\Error::appError(8, 'Undefined varia...', '/data/web/tp5/a...', 103, Array)
+#1 /data/web/tp5/application/push/controller/Worker.php(55): app\push\controller\Worker::login(2)
+#2 [internal function]: app\push\controller\Worker->onMessage(Object(Workerman\Connection\TcpConnection), '{"type":"login"...')
+#3 /data/web/tp5/vendor/workerman/workerman/Connection/TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\TcpConnection), '{"type":"login"...')
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #58)
+#5 /data/web/tp5/vendor/workerman/workerman/Events/Select.php(294): call_user_func_array(Array, Array)
+#6 /data/web/tp5/vendor/workerman/workerman/Worker.php(2382): Workerman\Events\Select->loop()
+#7 /data/web/tp5/vendor/workerman/workerman/Worker.php(1490): Workerman\Worker->run()
+#8 /data/web/tp5/vendor/workerman/workerman/Worker.php(1320): Workerman\Worker::forkOneWorkerForLinux(Object(Workerman\Worker))
+#9 /data/web/tp5/vendor/workerman/workerman/Worker.php(1294): Workerman\Worker::forkWorkersForLinux()
+#10 /data/web/tp5/vendor/workerman/workerman/Worker.php(509): Workerman\Worker::forkWorkers()
+#11 /data/web/tp5/vendor/topthink/think-worker/src/Server.php(48): Workerman\Worker::runAll()
+#12 /data/web/tp5/application/push/controller/Worker.php(24): think\worker\Server->__construct()
+#13 [internal function]: app\push\controller\Worker->__construct()
+#14 /data/web/tp5/thinkphp/library/think/App.php(359): ReflectionClass->newInstanceArgs(Array)
+#15 /data/web/tp5/thinkphp/library/think/Loader.php(479): think\App::invokeClass('app\\push\\contro...')
+#16 /data/web/tp5/thinkphp/library/think/App.php(581): think\Loader::controller('worker', 'controller', false, 'Error')
+#17 /data/web/tp5/thinkphp/library/think/App.php(457): think\App::module(Array, Array, NULL)
+#18 /data/web/tp5/thinkphp/library/think/App.php(139): think\App::exec(Array, Array)
+#19 /data/web/tp5/thinkphp/start.php(19): think\App::run()
+#20 /data/web/tp5/server.php(16): require('/data/web/tp5/t...')
+#21 {main}
+2019-11-13 18:17:21 pid:12125 Worker[12125] process terminated
+2019-11-13 18:17:21 pid:12123 worker[none:12125] exit with status 64000
+2019-11-13 18:18:11 pid:12123 Workerman[server.php] stopping ...
+2019-11-13 18:18:11 pid:12123 Workerman[server.php] has been stopped
+2019-11-13 18:18:11 pid:12218 Workerman[server.php] start in DEBUG mode
+2019-11-13 18:25:20 pid:12218 Workerman[server.php] stopping ...
+2019-11-13 18:25:20 pid:12218 Workerman[server.php] has been stopped
+2019-11-13 18:25:27 pid:12449 Workerman[server.php] start in DEBUG mode
+2019-11-13 18:29:25 pid:12449 Workerman[server.php] stopping ...
+2019-11-13 18:29:25 pid:12449 Workerman[server.php] has been stopped
+2019-11-13 18:29:27 pid:12562 Workerman[server.php] start in DEBUG mode
+2019-11-13 18:29:32 pid:12566 exception 'think\exception\ErrorException' with message 'Undefined variable: names' in /data/web/tp5/application/push/controller/Worker.php:57
+Stack trace:
+#0 /data/web/tp5/application/push/controller/Worker.php(57): think\Error::appError(8, 'Undefined varia...', '/data/web/tp5/a...', 57, Array)
+#1 [internal function]: app\push\controller\Worker->onMessage(Object(Workerman\Connection\TcpConnection), '{"type":"login"...')
+#2 /data/web/tp5/vendor/workerman/workerman/Connection/TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\TcpConnection), '{"type":"login"...')
+#3 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #58)
+#4 /data/web/tp5/vendor/workerman/workerman/Events/Select.php(294): call_user_func_array(Array, Array)
+#5 /data/web/tp5/vendor/workerman/workerman/Worker.php(2382): Workerman\Events\Select->loop()
+#6 /data/web/tp5/vendor/workerman/workerman/Worker.php(1490): Workerman\Worker->run()
+#7 /data/web/tp5/vendor/workerman/workerman/Worker.php(1320): Workerman\Worker::forkOneWorkerForLinux(Object(Workerman\Worker))
+#8 /data/web/tp5/vendor/workerman/workerman/Worker.php(1294): Workerman\Worker::forkWorkersForLinux()
+#9 /data/web/tp5/vendor/workerman/workerman/Worker.php(509): Workerman\Worker::forkWorkers()
+#10 /data/web/tp5/vendor/topthink/think-worker/src/Server.php(48): Workerman\Worker::runAll()
+#11 /data/web/tp5/application/push/controller/Worker.php(26): think\worker\Server->__construct()
+#12 [internal function]: app\push\controller\Worker->__construct()
+#13 /data/web/tp5/thinkphp/library/think/App.php(359): ReflectionClass->newInstanceArgs(Array)
+#14 /data/web/tp5/thinkphp/library/think/Loader.php(479): think\App::invokeClass('app\\push\\contro...')
+#15 /data/web/tp5/thinkphp/library/think/App.php(581): think\Loader::controller('worker', 'controller', false, 'Error')
+#16 /data/web/tp5/thinkphp/library/think/App.php(457): think\App::module(Array, Array, NULL)
+#17 /data/web/tp5/thinkphp/library/think/App.php(139): think\App::exec(Array, Array)
+#18 /data/web/tp5/thinkphp/start.php(19): think\App::run()
+#19 /data/web/tp5/server.php(16): require('/data/web/tp5/t...')
+#20 {main}
+2019-11-13 18:29:32 pid:12566 Worker[12566] process terminated
+2019-11-13 18:29:32 pid:12562 worker[none:12566] exit with status 64000
+2019-11-13 18:30:20 pid:12562 Workerman[server.php] stopping ...
+2019-11-13 18:30:20 pid:12562 Workerman[server.php] has been stopped
+2019-11-13 18:30:21 pid:12629 Workerman[server.php] start in DEBUG mode
+2019-11-13 18:30:24 pid:12632 Worker[12632] process terminated with ERROR: E_ERROR "Cannot access empty property in /data/web/tp5/application/push/controller/Worker.php on line 59"
+2019-11-13 18:30:24 pid:12629 worker[none:12632] exit with status 65280
+2019-11-13 18:30:37 pid:12631 Worker[12631] process terminated with ERROR: E_ERROR "Cannot access empty property in /data/web/tp5/application/push/controller/Worker.php on line 59"
+2019-11-13 18:30:37 pid:12629 worker[none:12631] exit with status 65280
+2019-11-13 18:31:16 pid:12629 Workerman[server.php] stopping ...
+2019-11-13 18:31:16 pid:12629 Workerman[server.php] has been stopped
+2019-11-13 18:31:17 pid:12702 Workerman[server.php] start in DEBUG mode
+2019-11-13 18:31:47 pid:12702 Workerman[server.php] stopping ...
+2019-11-13 18:31:47 pid:12702 Workerman[server.php] has been stopped
+2019-11-13 18:31:47 pid:12760 Workerman[server.php] start in DEBUG mode
+2019-11-13 18:32:38 pid:12760 Workerman[server.php] stopping ...
+2019-11-13 18:32:38 pid:12760 Workerman[server.php] has been stopped
+2019-11-13 18:32:38 pid:12822 Workerman[server.php] start in DEBUG mode
+2019-11-13 18:36:24 pid:12822 Workerman[server.php] stopping ...
+2019-11-13 18:36:24 pid:12822 Workerman[server.php] has been stopped
+2019-11-13 18:48:40 pid:13658 Workerman[server.php] start in DEBUG mode
+2019-11-13 18:49:01 pid:13662 Worker[13662] process terminated with ERROR: E_ERROR "Access to undeclared static property: app\push\controller\Worker::$name in /data/web/tp5/application/push/controller/Worker.php on line 67"
+2019-11-13 18:49:01 pid:13658 worker[none:13662] exit with status 65280
+2019-11-13 18:49:51 pid:13658 Workerman[server.php] stopping ...
+2019-11-13 18:49:51 pid:13658 Workerman[server.php] has been stopped
+2019-11-13 18:49:51 pid:13710 Workerman[server.php] start in DEBUG mode
+2019-11-13 18:55:01 pid:13710 Workerman[server.php] stopping ...
+2019-11-13 18:55:01 pid:13710 Workerman[server.php] has been stopped
+2019-11-13 18:55:02 pid:14014 Workerman[server.php] start in DEBUG mode
+2019-11-13 19:00:59 pid:14014 Workerman[server.php] stopping ...
+2019-11-13 19:00:59 pid:14014 Workerman[server.php] has been stopped
+2019-11-13 19:01:01 pid:14204 Workerman[server.php] start in DEBUG mode
+2019-11-14 17:38:39 pid:17289 Workerman[server.php] start in DEBUG mode
+2019-11-14 18:06:37 pid:17291 exception 'think\exception\ErrorException' with message 'Undefined offset: 3' in /data/web/tp5/application/push/controller/Worker.php:82
+Stack trace:
+#0 /data/web/tp5/application/push/controller/Worker.php(82): think\Error::appError(8, 'Undefined offse...', '/data/web/tp5/a...', 82, Array)
+#1 [internal function]: app\push\controller\Worker->onMessage(Object(Workerman\Connection\TcpConnection), '{"type":"send",...')
+#2 /data/web/tp5/vendor/workerman/workerman/Connection/TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\TcpConnection), '{"type":"send",...')
+#3 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #65)
+#4 /data/web/tp5/vendor/workerman/workerman/Events/Select.php(294): call_user_func_array(Array, Array)
+#5 /data/web/tp5/vendor/workerman/workerman/Worker.php(2382): Workerman\Events\Select->loop()
+#6 /data/web/tp5/vendor/workerman/workerman/Worker.php(1490): Workerman\Worker->run()
+#7 /data/web/tp5/vendor/workerman/workerman/Worker.php(1320): Workerman\Worker::forkOneWorkerForLinux(Object(Workerman\Worker))
+#8 /data/web/tp5/vendor/workerman/workerman/Worker.php(1294): Workerman\Worker::forkWorkersForLinux()
+#9 /data/web/tp5/vendor/workerman/workerman/Worker.php(509): Workerman\Worker::forkWorkers()
+#10 /data/web/tp5/vendor/topthink/think-worker/src/Server.php(48): Workerman\Worker::runAll()
+#11 /data/web/tp5/application/push/controller/Worker.php(26): think\worker\Server->__construct()
+#12 [internal function]: app\push\controller\Worker->__construct()
+#13 /data/web/tp5/thinkphp/library/think/App.php(359): ReflectionClass->newInstanceArgs(Array)
+#14 /data/web/tp5/thinkphp/library/think/Loader.php(479): think\App::invokeClass('app\\push\\contro...')
+#15 /data/web/tp5/thinkphp/library/think/App.php(581): think\Loader::controller('worker', 'controller', false, 'Error')
+#16 /data/web/tp5/thinkphp/library/think/App.php(457): think\App::module(Array, Array, NULL)
+#17 /data/web/tp5/thinkphp/library/think/App.php(139): think\App::exec(Array, Array)
+#18 /data/web/tp5/thinkphp/start.php(19): think\App::run()
+#19 /data/web/tp5/server.php(16): require('/data/web/tp5/t...')
+#20 {main}
+2019-11-14 18:06:37 pid:17291 Worker[17291] process terminated
+2019-11-14 18:06:37 pid:17289 worker[none:17291] exit with status 64000
+2019-11-14 18:07:50 pid:17289 Workerman[server.php] stopping ...
+2019-11-14 18:07:50 pid:17289 Workerman[server.php] has been stopped
+2019-11-14 18:07:54 pid:18424 Workerman[server.php] start in DEBUG mode
+2019-11-14 18:09:48 pid:18424 Workerman[server.php] stopping ...
+2019-11-14 18:09:48 pid:18424 Workerman[server.php] has been stopped
+2019-11-14 18:09:49 pid:18743 Workerman[server.php] start in DEBUG mode
+2019-11-14 18:09:56 pid:18744 Worker[18744] process terminated
+2019-11-14 18:11:03 pid:18747 Worker[18747] process terminated
+2019-11-14 18:11:48 pid:18743 Workerman[server.php] stopping ...
+2019-11-14 18:11:48 pid:18743 Workerman[server.php] has been stopped
+2019-11-14 18:11:49 pid:18883 Workerman[server.php] start in DEBUG mode
+2019-11-14 18:12:32 pid:18883 Workerman[server.php] stopping ...
+2019-11-14 18:12:32 pid:18883 Workerman[server.php] has been stopped
+2019-11-14 18:12:32 pid:18946 Workerman[server.php] start in DEBUG mode
+2019-11-14 18:18:16 pid:18946 Workerman[server.php] stopping ...
+2019-11-14 18:18:16 pid:18946 Workerman[server.php] has been stopped
+2019-11-14 18:18:16 pid:19137 Workerman[server.php] start in DEBUG mode
+2019-11-14 18:20:15 pid:19137 Workerman[server.php] stopping ...
+2019-11-14 18:20:15 pid:19137 Workerman[server.php] has been stopped
+2019-11-14 18:20:16 pid:19201 Workerman[server.php] start in DEBUG mode
+2019-11-15 09:17:01 pid:2949 Workerman[/data/web/tp5/server.php] start in DEBUG mode
+2019-11-15 09:17:30 pid:2950 exception 'think\exception\ErrorException' with message 'Undefined offset: 3' in /data/web/tp5/application/push/controller/Worker.php:87
+Stack trace:
+#0 /data/web/tp5/application/push/controller/Worker.php(87): think\Error::appError(8, 'Undefined offse...', '/data/web/tp5/a...', 87, Array)
+#1 [internal function]: app\push\controller\Worker->onMessage(Object(Workerman\Connection\TcpConnection), '{"type":"send",...')
+#2 /data/web/tp5/vendor/workerman/workerman/Connection/TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\TcpConnection), '{"type":"send",...')
+#3 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #62)
+#4 /data/web/tp5/vendor/workerman/workerman/Events/Select.php(294): call_user_func_array(Array, Array)
+#5 /data/web/tp5/vendor/workerman/workerman/Worker.php(2382): Workerman\Events\Select->loop()
+#6 /data/web/tp5/vendor/workerman/workerman/Worker.php(1490): Workerman\Worker->run()
+#7 /data/web/tp5/vendor/workerman/workerman/Worker.php(1320): Workerman\Worker::forkOneWorkerForLinux(Object(Workerman\Worker))
+#8 /data/web/tp5/vendor/workerman/workerman/Worker.php(1294): Workerman\Worker::forkWorkersForLinux()
+#9 /data/web/tp5/vendor/workerman/workerman/Worker.php(509): Workerman\Worker::forkWorkers()
+#10 /data/web/tp5/vendor/topthink/think-worker/src/Server.php(48): Workerman\Worker::runAll()
+#11 /data/web/tp5/application/push/controller/Worker.php(29): think\worker\Server->__construct()
+#12 [internal function]: app\push\controller\Worker->__construct()
+#13 /data/web/tp5/thinkphp/library/think/App.php(359): ReflectionClass->newInstanceArgs(Array)
+#14 /data/web/tp5/thinkphp/library/think/Loader.php(479): think\App::invokeClass('app\\push\\contro...')
+#15 /data/web/tp5/thinkphp/library/think/App.php(581): think\Loader::controller('worker', 'controller', false, 'Error')
+#16 /data/web/tp5/thinkphp/library/think/App.php(457): think\App::module(Array, Array, NULL)
+#17 /data/web/tp5/thinkphp/library/think/App.php(139): think\App::exec(Array, Array)
+#18 /data/web/tp5/thinkphp/start.php(19): think\App::run()
+#19 /data/web/tp5/server.php(16): require('/data/web/tp5/t...')
+#20 {main}
+2019-11-15 09:17:30 pid:2950 Worker[2950] process terminated
+2019-11-15 09:17:30 pid:2949 worker[none:2950] exit with status 64000
+2019-11-15 09:35:19 pid:2949 Workerman[server.php] stopping ...
+2019-11-15 09:35:19 pid:2949 Workerman[server.php] has been stopped
+2019-11-15 09:35:23 pid:3482 Workerman[/data/web/tp5/server.php] start in DEBUG mode
+2019-11-15 09:35:51 pid:3483 exception 'think\exception\ErrorException' with message 'Illegal offset type' in /data/web/tp5/application/push/controller/Worker.php:92
+Stack trace:
+#0 /data/web/tp5/application/push/controller/Worker.php(92): think\Error::appError(2, 'Illegal offset ...', '/data/web/tp5/a...', 92, Array)
+#1 [internal function]: app\push\controller\Worker->onMessage(Object(Workerman\Connection\TcpConnection), '{"type":"send",...')
+#2 /data/web/tp5/vendor/workerman/workerman/Connection/TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\TcpConnection), '{"type":"send",...')
+#3 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #61)
+#4 /data/web/tp5/vendor/workerman/workerman/Events/Select.php(294): call_user_func_array(Array, Array)
+#5 /data/web/tp5/vendor/workerman/workerman/Worker.php(2382): Workerman\Events\Select->loop()
+#6 /data/web/tp5/vendor/workerman/workerman/Worker.php(1490): Workerman\Worker->run()
+#7 /data/web/tp5/vendor/workerman/workerman/Worker.php(1320): Workerman\Worker::forkOneWorkerForLinux(Object(Workerman\Worker))
+#8 /data/web/tp5/vendor/workerman/workerman/Worker.php(1294): Workerman\Worker::forkWorkersForLinux()
+#9 /data/web/tp5/vendor/workerman/workerman/Worker.php(509): Workerman\Worker::forkWorkers()
+#10 /data/web/tp5/vendor/topthink/think-worker/src/Server.php(48): Workerman\Worker::runAll()
+#11 /data/web/tp5/application/push/controller/Worker.php(29): think\worker\Server->__construct()
+#12 [internal function]: app\push\controller\Worker->__construct()
+#13 /data/web/tp5/thinkphp/library/think/App.php(359): ReflectionClass->newInstanceArgs(Array)
+#14 /data/web/tp5/thinkphp/library/think/Loader.php(479): think\App::invokeClass('app\\push\\contro...')
+#15 /data/web/tp5/thinkphp/library/think/App.php(581): think\Loader::controller('worker', 'controller', false, 'Error')
+#16 /data/web/tp5/thinkphp/library/think/App.php(457): think\App::module(Array, Array, NULL)
+#17 /data/web/tp5/thinkphp/library/think/App.php(139): think\App::exec(Array, Array)
+#18 /data/web/tp5/thinkphp/start.php(19): think\App::run()
+#19 /data/web/tp5/server.php(16): require('/data/web/tp5/t...')
+#20 {main}
+2019-11-15 09:35:51 pid:3483 Worker[3483] process terminated
+2019-11-15 09:35:51 pid:3482 worker[none:3483] exit with status 64000
+2019-11-15 09:36:33 pid:3482 Workerman[server.php] stopping ...
+2019-11-15 09:36:33 pid:3482 Workerman[server.php] has been stopped
+2019-11-15 09:36:34 pid:3583 Workerman[/data/web/tp5/server.php] start in DEBUG mode
+2019-11-15 09:38:12 pid:3585 exception 'think\exception\ErrorException' with message 'Undefined offset: 1' in /data/web/tp5/application/push/controller/Worker.php:92
+Stack trace:
+#0 /data/web/tp5/application/push/controller/Worker.php(92): think\Error::appError(8, 'Undefined offse...', '/data/web/tp5/a...', 92, Array)
+#1 [internal function]: app\push\controller\Worker->onMessage(Object(Workerman\Connection\TcpConnection), '{"type":"send",...')
+#2 /data/web/tp5/vendor/workerman/workerman/Connection/TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\TcpConnection), '{"type":"send",...')
+#3 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #66)
+#4 /data/web/tp5/vendor/workerman/workerman/Events/Select.php(294): call_user_func_array(Array, Array)
+#5 /data/web/tp5/vendor/workerman/workerman/Worker.php(2382): Workerman\Events\Select->loop()
+#6 /data/web/tp5/vendor/workerman/workerman/Worker.php(1490): Workerman\Worker->run()
+#7 /data/web/tp5/vendor/workerman/workerman/Worker.php(1320): Workerman\Worker::forkOneWorkerForLinux(Object(Workerman\Worker))
+#8 /data/web/tp5/vendor/workerman/workerman/Worker.php(1294): Workerman\Worker::forkWorkersForLinux()
+#9 /data/web/tp5/vendor/workerman/workerman/Worker.php(509): Workerman\Worker::forkWorkers()
+#10 /data/web/tp5/vendor/topthink/think-worker/src/Server.php(48): Workerman\Worker::runAll()
+#11 /data/web/tp5/application/push/controller/Worker.php(29): think\worker\Server->__construct()
+#12 [internal function]: app\push\controller\Worker->__construct()
+#13 /data/web/tp5/thinkphp/library/think/App.php(359): ReflectionClass->newInstanceArgs(Array)
+#14 /data/web/tp5/thinkphp/library/think/Loader.php(479): think\App::invokeClass('app\\push\\contro...')
+#15 /data/web/tp5/thinkphp/library/think/App.php(581): think\Loader::controller('worker', 'controller', false, 'Error')
+#16 /data/web/tp5/thinkphp/library/think/App.php(457): think\App::module(Array, Array, NULL)
+#17 /data/web/tp5/thinkphp/library/think/App.php(139): think\App::exec(Array, Array)
+#18 /data/web/tp5/thinkphp/start.php(19): think\App::run()
+#19 /data/web/tp5/server.php(16): require('/data/web/tp5/t...')
+#20 {main}
+2019-11-15 09:38:12 pid:3585 Worker[3585] process terminated
+2019-11-15 09:38:12 pid:3583 worker[none:3585] exit with status 64000
+2019-11-15 09:39:06 pid:3588 exception 'think\exception\ErrorException' with message 'Undefined offset: 1' in /data/web/tp5/application/push/controller/Worker.php:92
+Stack trace:
+#0 /data/web/tp5/application/push/controller/Worker.php(92): think\Error::appError(8, 'Undefined offse...', '/data/web/tp5/a...', 92, Array)
+#1 [internal function]: app\push\controller\Worker->onMessage(Object(Workerman\Connection\TcpConnection), '{"type":"send",...')
+#2 /data/web/tp5/vendor/workerman/workerman/Connection/TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\TcpConnection), '{"type":"send",...')
+#3 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #65)
+#4 /data/web/tp5/vendor/workerman/workerman/Events/Select.php(294): call_user_func_array(Array, Array)
+#5 /data/web/tp5/vendor/workerman/workerman/Worker.php(2382): Workerman\Events\Select->loop()
+#6 /data/web/tp5/vendor/workerman/workerman/Worker.php(1490): Workerman\Worker->run()
+#7 /data/web/tp5/vendor/workerman/workerman/Worker.php(1320): Workerman\Worker::forkOneWorkerForLinux(Object(Workerman\Worker))
+#8 /data/web/tp5/vendor/workerman/workerman/Worker.php(1294): Workerman\Worker::forkWorkersForLinux()
+#9 /data/web/tp5/vendor/workerman/workerman/Worker.php(509): Workerman\Worker::forkWorkers()
+#10 /data/web/tp5/vendor/topthink/think-worker/src/Server.php(48): Workerman\Worker::runAll()
+#11 /data/web/tp5/application/push/controller/Worker.php(29): think\worker\Server->__construct()
+#12 [internal function]: app\push\controller\Worker->__construct()
+#13 /data/web/tp5/thinkphp/library/think/App.php(359): ReflectionClass->newInstanceArgs(Array)
+#14 /data/web/tp5/thinkphp/library/think/Loader.php(479): think\App::invokeClass('app\\push\\contro...')
+#15 /data/web/tp5/thinkphp/library/think/App.php(581): think\Loader::controller('worker', 'controller', false, 'Error')
+#16 /data/web/tp5/thinkphp/library/think/App.php(457): think\App::module(Array, Array, NULL)
+#17 /data/web/tp5/thinkphp/library/think/App.php(139): think\App::exec(Array, Array)
+#18 /data/web/tp5/thinkphp/start.php(19): think\App::run()
+#19 /data/web/tp5/server.php(16): require('/data/web/tp5/t...')
+#20 {main}
+2019-11-15 09:39:06 pid:3588 Worker[3588] process terminated
+2019-11-15 09:39:06 pid:3583 worker[none:3588] exit with status 64000
+2019-11-15 09:41:15 pid:3583 Workerman[server.php] stopping ...
+2019-11-15 09:41:15 pid:3583 Workerman[server.php] has been stopped
+2019-11-15 09:41:16 pid:4211 Workerman[/data/web/tp5/server.php] start in DEBUG mode
+2019-11-15 09:42:42 pid:4211 Workerman[server.php] stopping ...
+2019-11-15 09:42:42 pid:4211 Workerman[server.php] has been stopped
+2019-11-15 09:42:43 pid:4289 Workerman[/data/web/tp5/server.php] start in DEBUG mode
+2019-11-15 10:27:35 pid:4289 Workerman[server.php] stopping ...
+2019-11-15 10:27:35 pid:4289 Workerman[server.php] has been stopped
+2019-11-18 11:51:55 pid:18546 Workerman[/data/web/tp5/server.php] start in DEBUG mode
+2019-11-18 11:53:04 pid:18548 exception 'think\exception\ErrorException' with message 'Undefined offset: 3' in /data/web/tp5/application/push/controller/Worker.php:92
+Stack trace:
+#0 /data/web/tp5/application/push/controller/Worker.php(92): think\Error::appError(8, 'Undefined offse...', '/data/web/tp5/a...', 92, Array)
+#1 [internal function]: app\push\controller\Worker->onMessage(Object(Workerman\Connection\TcpConnection), '{"type":"send",...')
+#2 /data/web/tp5/vendor/workerman/workerman/Connection/TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\TcpConnection), '{"type":"send",...')
+#3 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #67)
+#4 /data/web/tp5/vendor/workerman/workerman/Events/Select.php(294): call_user_func_array(Array, Array)
+#5 /data/web/tp5/vendor/workerman/workerman/Worker.php(2382): Workerman\Events\Select->loop()
+#6 /data/web/tp5/vendor/workerman/workerman/Worker.php(1490): Workerman\Worker->run()
+#7 /data/web/tp5/vendor/workerman/workerman/Worker.php(1320): Workerman\Worker::forkOneWorkerForLinux(Object(Workerman\Worker))
+#8 /data/web/tp5/vendor/workerman/workerman/Worker.php(1294): Workerman\Worker::forkWorkersForLinux()
+#9 /data/web/tp5/vendor/workerman/workerman/Worker.php(509): Workerman\Worker::forkWorkers()
+#10 /data/web/tp5/vendor/topthink/think-worker/src/Server.php(48): Workerman\Worker::runAll()
+#11 /data/web/tp5/application/push/controller/Worker.php(29): think\worker\Server->__construct()
+#12 [internal function]: app\push\controller\Worker->__construct()
+#13 /data/web/tp5/thinkphp/library/think/App.php(359): ReflectionClass->newInstanceArgs(Array)
+#14 /data/web/tp5/thinkphp/library/think/Loader.php(479): think\App::invokeClass('app\\push\\contro...')
+#15 /data/web/tp5/thinkphp/library/think/App.php(581): think\Loader::controller('worker', 'controller', false, 'Error')
+#16 /data/web/tp5/thinkphp/library/think/App.php(457): think\App::module(Array, Array, NULL)
+#17 /data/web/tp5/thinkphp/library/think/App.php(139): think\App::exec(Array, Array)
+#18 /data/web/tp5/thinkphp/start.php(19): think\App::run()
+#19 /data/web/tp5/server.php(16): require('/data/web/tp5/t...')
+#20 {main}
+2019-11-18 11:53:04 pid:18548 Worker[18548] process terminated
+2019-11-18 11:53:04 pid:18546 worker[none:18548] exit with status 64000
+2019-11-18 16:07:31 pid:18546 Workerman[server.php] stopping ...
+2019-11-18 16:07:31 pid:18546 Workerman[server.php] has been stopped

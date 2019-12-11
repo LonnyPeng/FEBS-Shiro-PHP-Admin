@@ -1,0 +1,229 @@
+<div class="layui-fluid layui-anim febs-anim" id="febs-log" lay-title="系统日志">
+    <div class="layui-row febs-container">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-body febs-table-full">
+                    <form class="layui-form layui-table-form" lay-filter="log-table-form">
+                        <div class="layui-row">
+                            <div class="layui-col-md10">
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label layui-form-label-sm">操作人</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" name="username" autocomplete="off" class="layui-input" placeholder="请输入操作人">
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label layui-form-label-sm">操作时间</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" name="createTime" id="createTime" class="layui-input" placeholder="请选择操作时间">
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label layui-form-label-sm">操作方法</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" name="method" autocomplete="off" class="layui-input" placeholder="请输入操作方法">
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label layui-form-label-sm">操作类型</label>
+                                        <div class="layui-input-inline">
+                                            <select name="operation">
+                                                <option value="">请选择</option>
+                                                <option value="view">查看</option>
+                                                <option value="add">新增</option>
+                                                <option value="update">修改</option>
+                                                <option value="delete">删除</option>
+                                                <option value="import">导入</option>
+                                                <option value="export">导出</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-md2 table-action-area">
+                                <div class="layui-btn layui-btn-sm layui-btn-primary table-action" id="query">
+                                    <i class="layui-icon">&#xe848;</i>
+                                </div>
+                                <div class="layui-btn layui-btn-sm layui-btn-primary table-action" id="reset">
+                                    <i class="layui-icon">&#xe79b;</i>
+                                </div>
+
+                                <?php if (has_perm('log:delete,log:export')) : ?>
+                                    <div class="layui-btn layui-btn-sm layui-btn-primary table-action action-more">
+                                        <i class="layui-icon">&#xe875;</i>
+                                    </div>
+                                <?php endif;?>
+                            </div>
+                        </div>
+                    </form>
+                    <table lay-filter="logTable" lay-data="{id: 'logTable'}"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="log-option">
+    <?php if (!has_perm('log:delete')) : ?>
+    <span>
+        <span class="layui-badge-dot febs-bg-orange"></span> 无权限
+    </span>
+    <?php endif;?>
+
+    <?php if (has_perm('log:delete')) : ?>
+        <a lay-event="del"><i class="layui-icon febs-edit-area febs-red">&#xe7f9;</i></a>
+    <?php endif;?>
+</script>
+
+<script type="text/html" id="zizeng">
+    {{d.LAY_INDEX}}
+</script>
+
+<script type="text/javascript">
+    layui.use(['jquery', 'laydate', 'form', 'table', 'febs', 'dropdown', 'soulTable'], function () {
+        var $ = layui.jquery,
+            laydate = layui.laydate,
+            febs = layui.febs,
+            form = layui.form,
+            table = layui.table,
+            dropdown = layui.dropdown,
+            soulTable = layui.soulTable,
+            $view = $('#febs-log'),
+            $query = $view.find('#query'),
+            $reset = $view.find('#reset'),
+            $delete = $view.find('#delete'),
+            $searchForm = $view.find('form'),
+            sortObject = {field: 'createtime', type: null},
+            tableIns;
+
+        laydate.render({
+            elem: '#createTime',
+            range: true,
+            trigger: 'click'
+        });
+
+        form.render();
+        initTable();
+
+        dropdown.render({
+            elem: $view.find('.action-more'),
+            click: function (name, elem, event) {
+                if (name === 'delete') {
+                    var checkStatus = table.checkStatus('logTable');
+                    if (!checkStatus.data.length) {
+                        febs.alert.warn('请勾选需要删除的日志');
+                    } else {
+                        febs.modal.confirm('删除日志', '确定删除所选日志？', function () {
+                            var logIds = [];
+                            layui.each(checkStatus.data, function (key, item) {
+                                logIds.push(item.id)
+                            });
+                            deleteLogs(logIds.join(','))
+                        });
+                    }
+                }
+                if (name === 'export') {
+                    febs.download(ctx + 'log/excel', getQueryParams(), '系统日志表.xlsx');
+                }
+            },
+            options: [{
+                name: 'delete',
+                title: '删除日志',
+                perms: 'log:delete'
+            }, {
+                name: 'export',
+                title: '导出Excel',
+                perms: 'log:export'
+            }]
+        });
+
+        table.on('tool(logTable)', function (obj) {
+            var data = obj.data,
+                layEvent = obj.event;
+            if (layEvent === 'del') {
+                febs.modal.confirm('删除日志', '确定删除该条系统日志？', function () {
+                    deleteLogs(data.id);
+                });
+            }
+        });
+
+        table.on('sort(logTable)', function (obj) {
+            sortObject = obj;
+            tableIns.reload({
+                initSort: obj,
+                where: $.extend(getQueryParams(), {
+                    field: obj.field,
+                    order: obj.type
+                })
+            });
+        });
+
+        $query.on('click', function () {
+            var params = $.extend(getQueryParams(), {field: sortObject.field, order: sortObject.type});
+            tableIns.reload({where: params, page: {curr: 1}});
+        });
+
+        $reset.on('click', function () {
+            $searchForm[0].reset();
+            sortObject.type = 'null';
+            tableIns.reload({where: getQueryParams(), page: {curr: 1}, initSort: sortObject});
+        });
+
+        function initTable() {
+            tableIns = febs.table.init({
+                elem: $view.find('table'),
+                id: 'logTable',
+                url: ctx + 'log/table',
+                toolbar: true,
+                rowDrag: {done: function (obj) {}},
+                overflow: 'title',
+                totalRow: true,
+                cols: [[
+                    {type: 'checkbox', fixed: 'left'},
+                    {field: 'ID', title: '序号', templet: '#zizeng', fixed: 'left', width: 80, align: 'center', filter: true, totalRowText: '合计'},
+                    {field: 'username', title: '操作人', align: 'center', filter: true},
+                    {field: 'operation', title: '操作类型', align: 'center', filter: true},
+                    {field: 'method', title: '操作方法', align: 'center', filter: true},
+                    {field: 'params', title: '方法参数', align: 'center', filter: true},
+                    {field: 'ip', title: 'IP地址', align: 'center', filter: true},
+                    {field: 'createtime', title: '创建时间', minWidth: 180, align: 'center', sort: true, filter: true},
+                    {title: '操作', toolbar: '#log-option', align: 'center'}
+                ]],
+                filter: {
+                    bottom: false,
+                    items: ['clearCache'],
+                    cache: true
+                },
+                done: function () {
+                    soulTable.render(this);
+                }
+            });
+        }
+
+        function deleteLogs(logIds) {
+            febs.get(ctx + 'log/delete', {ids: logIds}, function () {
+                febs.alert.success('删除系统日志成功');
+                $query.click();
+            });
+        }
+
+        function getQueryParams() {
+            var createTimeFrom,
+                createTimeTo,
+                createTime = $searchForm.find('input[name="createTime"]').val();
+            if (createTime) {
+                createTimeFrom = createTime.split(' - ')[0];
+                createTimeTo = createTime.split(' - ')[1];
+            }
+            return {
+                createTimeFrom: createTimeFrom,
+                createTimeTo: createTimeTo,
+                username: $searchForm.find('input[name="username"]').val().trim(),
+                method: $searchForm.find('input[name="method"]').val().trim(),
+                operation: $searchForm.find('select[name="operation"]').val(),
+                invalidate_ie_cache: new Date()
+            };
+        }
+    })
+</script>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>后台管理</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    {:css('layui/css/layui,febs/css/febs,febs/css/eleTree,febs/css/apexcharts.min,febs/css/formSelects-v4,febs/css/soulTable')}
+
+    {:js('js/iconfont', 'web')}
+    <style type="text/css">
+        .icon {
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+    </style>
+
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key={:GAO_DE_KEY}&plugin=AMap.Autocomplete"></script>
+    <script type="text/javascript" src="https://webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
+    <link rel="icon" href="{:WEB_HOST . WEB_BASE}favicon.ico" type="image/x-icon"/>
+
+    <script type="text/javascript">
+        var ADMIN_HOST = '{:WEB_HOST . WEB_BASE}admin/';
+        var ADMIN_FEBS = '{:WEB_HOST . WEB_BASE}static/febs/';
+        var ADMIN_LAY = '{:WEB_HOST . WEB_BASE}static/layui/';
+
+        var OSS_CONFIG = {:$ossConfig};
+        var WEBSCOKET_ENABLED = '{:WEBSCOKET_ENABLED}';
+        var WEBSCOKET_HOST = '{:WEBSCOKET_HOST}';
+        var WEBSCOKET_PORT = '{:WEBSCOKET_PORT}';
+
+        var SCREEN_WEIGHT = screen.width;
+        var SCREEN_HEIGHT = screen.height;
+    </script>
+</head>
+<body>
+    <div id="febs"></div>
+    {:js('layui/layui')}
+    <script type="text/javascript">
+        var ctx = ADMIN_HOST;
+        var currentUser = {:$data};
+
+        layui.config({
+            base: ADMIN_FEBS,
+            debug: true
+        }).extend({
+            request: 'lay/modules/request',
+            formSelects: 'lay/extends/formSelects-v4.min',
+            treeSelect: 'lay/extends/treeSelect',
+            apexcharts: 'lay/extends/apexcharts.min',
+            eleTree: 'lay/extends/eleTree',
+            treetable: 'treetable-lay/treetable',
+            tinymce: 'tinymce/tinymce',
+
+            soulTable: 'soul-table/soulTable',
+            tableChild: 'soul-table/tableChild',
+            tableFilter: 'soul-table/tableFilter',
+            tableMerge: 'soul-table/tableMerge',
+            excel: 'soul-table/excel',
+
+            rsa: 'lay/modules/rsa',
+        }).use(['index', 'febs', 'layim'], function () {
+            var febs = layui.febs,
+                layim = layui.layim;
+
+            if (!WEBSCOKET_ENABLED) {
+                return false;
+            }
+
+            if (!window.WebSocket) {
+                febs.alert.error("抱歉，您的浏览器不支持WebSocket协议!");
+                return false;
+            }
+
+            var ws = new WebSocket("ws://" + WEBSCOKET_HOST + ":" + WEBSCOKET_PORT);
+            var info = {
+                type: 'login',
+                uid: currentUser.userId,
+                username: currentUser.username
+            };
+
+            ws.onopen = function() {ws.send(JSON.stringify(info))}; //用户登录聊天系统
+
+            layim.config({
+                init: {
+                    url: ctx + "chat/init",
+                },
+                min: true,
+                isgroup: false //是否开启群组
+            });
+
+            layim.on('ready', function (options) {
+                console.log(options);
+            });
+
+            layim.on('online', function (status) {
+                console.log(status);
+            });
+
+            //监听发送消息
+            layim.on('sendMessage', function(data) {
+                var data = {
+                    type: 'send',
+                    data: data,
+                };
+
+                ws.send(JSON.stringify(data));
+            });
+
+            ws.onmessage = function(evt) {
+                var result = JSON.parse(evt.data);
+
+                if (result.code != 200) {
+                    febs.alert.error(result.message);
+
+                    return false;
+                }
+
+                layim.getMessage(result.data);
+            };
+
+            ws.onclose = function(evt) {console.log("WebSocketClosed!");};
+            ws.onerror = function(evt) {console.log("WebSocketError!");};
+        });
+    </script>
+</body>
+</html>

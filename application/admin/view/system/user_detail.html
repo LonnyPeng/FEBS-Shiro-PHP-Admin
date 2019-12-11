@@ -1,0 +1,81 @@
+<style type="text/css">
+    #febs-user-detail #user-img, #febs-user-detail .user-info {
+        display: inline-block;
+        float: left;
+        margin-left: 15px;
+    }
+
+    #febs-user-detail #user-img img {
+        width: 7rem;
+        margin: 10px 10px 0 20px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    #febs-user-detail #user-info-wrapper {
+        margin: 0 0 1rem 0;
+        display: inline-block;
+    }
+
+    #febs-user-detail .user-info div {
+        margin: 10px 15px;
+        max-width: 19rem;
+    }
+
+    #febs-user-detail #options-wrapper a {
+        padding: 4px 6px;
+        color: rgba(0, 0, 0, 0.65);
+        border: 1px solid #d9d9d9;
+        border-radius: 2px;
+    }
+
+    #febs-user-detail #options-wrapper a:hover {
+        color: #40a9ff;
+        border-color: #40a9ff;
+    }
+
+</style>
+<div class="layui-fluid" id="febs-user-detail" lay-title="个人信息">
+    <div id="user-info-wrapper">
+        <div id="user-img">
+            <img alt="头像" title="头像" src="{:$headimg}">
+        </div>
+        <div class="user-info">
+            <div><span class="layui-icon layui-icon-user"></span> 账号：
+                {:$username}
+            </div>
+            <div><span class="layui-icon layui-icon-user"></span> 昵称：
+                {:$nickname}
+            </div>
+            <div><span class="layui-icon layui-icon-user"></span> 真实姓名：
+                {:$realname}
+            </div>
+            <div><span class="layui-icon layui-icon-trophy"></span> 角色：
+                {:$roleName}
+            </div>
+            <div><span class="layui-icon layui-icon-skin"></span> 性别：
+                {:$sexName}
+            </div>
+            <div><span class="layui-icon layui-icon-heatmap"></span> 地址：
+                {:$addressName}
+            </div>
+        </div>
+        <div class="user-info">
+            <div><span class="layui-icon layui-icon-phone"></span> 电话：
+                {:$phone}
+            </div>
+            <div><span class="layui-icon layui-icon-mail"></span> 邮箱：
+                {:$email}
+            </div>
+            <div><span class="layui-icon layui-icon-idcard"></span> 身份证：
+                {:$idcard}
+            </div>
+            <div><span class="layui-icon layui-icon-pushpin"></span> 备注：
+                {:$note}
+            </div>
+            <div><span class="layui-icon layui-icon-reloadtime"></span> 最后登录时间：
+                {:$logintime}
+            </div>
+        </div>
+    </div>
+</div>

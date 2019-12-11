@@ -1,0 +1,58 @@
+<div class="layui-fluid layui-anim febs-anim" id="febs-image" lay-title="文件上传">
+    <div class="layui-row febs-container">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-body febs-table-full">
+                    <?php if (has_perm('upload:one')) : ?>
+                        <button class="layui-btn  layui-btn-sm layui-btn-success" id="uploadOne">
+                            <i class="layui-icon">&#xe865;</i> 单文件上传
+                        </button>
+                    <?php endif;?>
+
+                    <?php if (has_perm('eximport:template')) : ?>
+                        <button class="layui-btn layui-btn-sm layui-btn-success" id="uploadMore">
+                            <i class="layui-icon">&#xe865;</i> 多文件上传
+                        </button>
+                    <?php endif;?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="zizeng">
+    {{d.LAY_INDEX}}
+</script>
+
+<script type="text/javascript">
+    layui.use(['jquery', 'febs', 'aliossUploader'], function () {
+        var $ = layui.jquery,
+            febs = layui.febs,
+            aliossUploader = layui.aliossUploader,
+            $view = $('#febs-image');
+
+        aliossUploader.render({
+            elm: '#uploadOne',
+            prefixPath: 'Tmp/',
+            allUploaded: function(res){
+                console.log(res);
+            },
+            policyFailed: function(res){
+                console.log(res);
+            }
+        });
+
+        aliossUploader.render({
+            elm: '#uploadMore',
+            multiple: true,
+            prefixPath: 'Images/',
+            fileType: 'images',
+            allUploaded: function(res){
+                console.log(res);
+            },
+            policyFailed: function(res){
+                console.log(res);
+            }
+        });
+    })
+</script>

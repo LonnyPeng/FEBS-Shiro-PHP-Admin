@@ -1,0 +1,122 @@
+<div class="layui-fluid layui-anim febs-anim" id="febs-eximport" lay-title="导入导出">
+    <div class="layui-row febs-container">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-body febs-table-full">
+                    <?php if (has_perm('eximport:template')) : ?>
+                        <button class="layui-btn  layui-btn-sm layui-btn-primary" id="template-download">
+                            <i class="layui-icon">&#xe82a;</i> 模板下载
+                        </button>
+                    <?php endif;?>
+
+                    <?php if (has_perm('eximport:export:excel')) : ?>
+                        <button class="layui-btn  layui-btn-sm layui-btn-primary" id="export-excel">
+                            <i class="layui-icon">&#xe7a8;</i> 导出Excel
+                        </button>
+                    <?php endif;?>
+
+                    <?php if (has_perm('eximport:export:pdf')) : ?>
+                        <button class="layui-btn  layui-btn-sm layui-btn-primary" id="export-pdf">
+                            <i class="layui-icon">&#xe7a8;</i> 导出PDF
+                        </button>
+                    <?php endif;?>
+
+                    <?php if (has_perm('eximport:import')) : ?>
+                        <button class="layui-btn  layui-btn-sm layui-btn-success" id="import">
+                            <i class="layui-icon">&#xe7aa;</i> 导入Excel
+                        </button>
+                    <?php endif;?>
+
+                    <table lay-filter="eximportTable" lay-data="{id: 'eximportTable'}"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="zizeng">
+    {{d.LAY_INDEX}}
+</script>
+
+<script type="text/javascript">
+    layui.use(['jquery', 'table', 'febs', 'upload', 'soulTable'], function () {
+        var $ = layui.jquery,
+            febs = layui.febs,
+            upload = layui.upload,
+            table = layui.table,
+            soulTable = layui.soulTable,
+            $view = $('#febs-eximport'),
+            tableIns;
+
+        initTable();
+
+        upload.render({
+            elem: '#import',
+            url: ctx + 'eximport/import',
+            accept: 'file',
+            exts: 'xlsx|xls', // 只能上传 .xlsx格式
+            size: 5 * 1024, // kb
+            before: function () {
+                febs.view.loadBar.start();
+            },
+            done: function (res) {
+                febs.view.loadBar.finish();
+                if (res.code == 200) {
+                    // 刷新 table
+                    tableIns.reload({page: {curr: 1}});
+                    var data = res.data;
+                    // 弹出导入结果
+                    febs.modal.open('导入结果', 'eximport/importResult', {
+                        area: $(window).width() <= 750 ? '95%' : '1000px',
+                        data: data
+                    });
+                } else {
+                    febs.alert.error(res.message);
+                }
+            }, error: function (res) {
+                febs.view.loadBar.error();
+                febs.alert.error('导入失败！');
+            }
+        });
+
+        $view.on('click', '#template-download', function () {
+            febs.download(ctx + 'eximport/template', null, 'Excel导入模板.xlsx');
+        });
+
+        $view.on('click', '#export-excel', function () {
+            febs.download(ctx + 'eximport/exportExcel', {}, 'Excel导出结果.xlsx');
+        });
+
+        $view.on('click', '#export-pdf', function () {
+            febs.download(ctx + 'eximport/exportPdf', {}, 'PDF导出结果.pdf');
+        });
+
+        function initTable() {
+            tableIns = febs.table.init({
+                elem: $view.find('table'),
+                id: 'eximportTable',
+                url: ctx + 'eximport/table',
+                toolbar: true,
+                rowDrag: {done: function (obj) {}},
+                overflow: 'title',
+                totalRow: true,
+                cols: [[
+                    {field: 'ID', title: '序号', templet: '#zizeng', fixed: 'left', width: 80, align: 'center', filter: true, totalRowText: '合计'},
+                    {field: 'field1', title: '字段1', align: 'center', filter: true, totalRow: true},
+                    {field: 'field2', title: '字段2', align: 'center', filter: true, totalRow: true},
+                    {field: 'field3', title: '字段3', align: 'center', filter: true, totalRow: true},
+                    {field: 'createtime', title: '导入时间', align: 'center'}
+                ]],
+                filter: {
+                    bottom: false,
+                    items: ['clearCache'],
+                    cache: true
+                },
+                done: function () {
+                    soulTable.render(this);
+                }
+            });
+        }
+
+    })
+</script>

@@ -1,0 +1,69 @@
+<div class="layui-fluid layui-anim febs-anim" id="febs-map-train" lay-title="地图标注">
+    <div class="layui-row febs-container">
+        <div class="layui-card">
+            <div style="padding: .1rem;">
+                <div id="container" class="map"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    layui.use(['jquery', 'febs'], function () {
+        var $ = layui.jquery,
+            febs = layui.febs,
+            $view = $('#febs-map-train');
+
+        $view.find('#container').css({"height": document.documentElement.clientHeight - 97 + 'px'});
+
+        var map = new AMap.Map("container", {
+            resizeEnable: true,
+            zoom: 5 //初始地图级别
+        });
+
+        AMapUI.load(['ui/misc/PointSimplifier', 'lib/$'], function(PointSimplifier, $) {
+            if (!PointSimplifier.supportCanvas) {
+                febs.alert.warn('当前环境不支持 Canvas！');
+                return false;
+            }
+
+            var pointSimplifierIns = new PointSimplifier({
+                map: map, //所属的地图实例
+                getPosition: function(item) {
+                    latlng = item.latlng;
+
+                    var parts = latlng.split(',');
+
+                    //返回经纬度
+                    return [parseFloat(parts[0]), parseFloat(parts[1])];
+                },
+                getHoverTitle: function(dataItem, idx) {
+                    return '<div>'+dataItem.address+'</div></div>';
+                },
+                renderOptions: {
+                    //点的样式
+                    pointStyle: {
+                        width: 6,
+                        height: 6,
+                        fillStyle: '#1f77b4',
+                    },
+                    //鼠标hover时的title信息
+                    hoverTitleStyle: {
+                        position: 'top'
+                    }
+                }
+            });
+
+            window.pointSimplifierIns = pointSimplifierIns;
+
+            $.ajax({
+                url: ctx + 'map/train',
+                dateType: 'json',
+                success: function (re) {
+                    if (re) {
+                        pointSimplifierIns.setData(re);
+                    }
+                }
+            });
+        });
+    });
+</script>

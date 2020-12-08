@@ -23,7 +23,7 @@
 /**
  * 高德密钥
  */
-!defined('GAO_DE_KEY') && define('GAO_DE_KEY', '9408d63ed2c089c579170cf0cbb9eb74');
+!defined('GAO_DE_KEY') && define('GAO_DE_KEY', '123456');
 
 /**
  * RSA 加密
@@ -56,10 +56,10 @@
 /**#@+
  * OSS 配置
  */
-!defined('OSS_ACCESS_ID') && define('OSS_ACCESS_ID', 'LTAIIvTF6sjCIiwQ');
-!defined('OSS_ACCESS_KEY') && define('OSS_ACCESS_KEY', 'U0wc8NupGYf7rJnQowJLBepwQXbJeg');
-!defined('OSS_ENDPOINT') && define('OSS_ENDPOINT', 'oss-cn-beijing.aliyuncs.com');
-!defined('OSS_TEST_BUCKET') && define('OSS_TEST_BUCKET', 'lonny-p');
+!defined('OSS_ACCESS_ID') && define('OSS_ACCESS_ID', 'ID');
+!defined('OSS_ACCESS_KEY') && define('OSS_ACCESS_KEY', 'KEY');
+!defined('OSS_ENDPOINT') && define('OSS_ENDPOINT', '*.COM');
+!defined('OSS_TEST_BUCKET') && define('OSS_TEST_BUCKET', 'NAME');
 
 /**
  * 极光推送
